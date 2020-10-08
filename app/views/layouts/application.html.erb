@@ -17,6 +17,24 @@
     <% if flash[:alert] %>
       <p class="alert"><%= alert %></p>
     <% end %>
+
+    <% if member_signed_in? %>
+      <p class='control'>
+        <%= link_to current_member.name, edit_member_registration_path %>
+      </p>
+      <p class='control'>
+        <%= link_to 'Logout', destroy_member_session_path, method: :delete %>
+      </p>
+
+    <% else %>
+      <p class="control">
+        <%= link_to 'Sign In', new_member_session_path %>
+      </p>
+      <p class="control">
+        <%= link_to 'Sign Up', new_member_registration_path %>
+      </p>
+
+    <% end %>
     
     <%= yield %>
   </body>
