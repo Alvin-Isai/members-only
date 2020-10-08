@@ -1,0 +1,1 @@
+This is a project for The Odin Project where I learn and test out how to use authentication and authorization using the Devise gem.
