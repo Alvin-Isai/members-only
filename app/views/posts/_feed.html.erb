@@ -1,45 +1,56 @@
 <div class='container'>
   <div class='notification'>
-    <% @posts.each do |post| %>
-      <article class="media">
-        <figure class="media-left">
-          <p class="image is-64x64">
-            <img src="https://bulma.io/images/placeholders/128x128.png">
-          </p>
-        </figure>
-        <div class="media-content">
-          <div class="content">
-            <p>
-              <strong><%= post.title %></strong>
-              <br>
-              <%= post.body %>
+    <div class='box'>
+      <% @posts.each do |post| %>
+        <article class="media">
+          
+          <figure class="media-left">  
+            <p class="image is-64x64">
+              <img src="https://bulma.io/images/placeholders/128x128.png">
             </p>
-          </div>
-          <nav class="level is-mobile">
-            <div class="level-left">
-              
-              <%= link_to post, class: 'level-item' do %>
-                <span class='icon'>
-                  <i class='fa fa-link' aria-hidden='true'></i>
-                </span>
+          </figure>
+          
+          <div class="media-content">
+            <div class="content">
+              <% if member_signed_in? %>
+                <p class='tag is-danger is-medium' >
+                  <%= post.member.name %>
+                  <small>@<%= post.member.username %> </small>
+                </p>
               <% end %>
-            
-              <%= link_to edit_post_path(post), class: 'level-item' do %>
-                <span class='icon'>
-                  <i class='fa fa-pencil' aria-hidden='true'></i></span>
-                </span>
-              <% end %>
-
-              <%= link_to post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'level-item' do %>
-                <span class='icon'>
-                  <i class='fa fa-trash-o' aria-hidden='true'></i></span>
-                </span>
-              <% end %>
-
+              <p>
+                <strong class='title is-4'><%= post.title %></strong>
+                <br>
+                <%= post.body %>
+              </p>
             </div>
-          </nav>
-        </div>
-      </article>
-    <% end %>
+            
+            <nav class="level is-mobile">
+              <div class="level-left">
+                <% if member_signed_in? %>
+                  <%= link_to post, class: 'level-item' do %>
+                    <span class='icon'>
+                      <i class='fa fa-link' aria-hidden='true'></i>
+                    </span>
+                  <% end %>
+                
+                  <%= link_to edit_post_path(post), class: 'level-item' do %>
+                    <span class='icon'>
+                      <i class='fa fa-pencil' aria-hidden='true'></i></span>
+                    </span>
+                  <% end %>
+
+                  <%= link_to post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'level-item' do %>
+                    <span class='icon'>
+                      <i class='fa fa-trash-o' aria-hidden='true'></i></span>
+                    </span>
+                  <% end %>
+                <% end %>
+              </div>
+            </nav>
+          </div>
+        </article>
+      <% end %>
+    </div>
   </div>
 </div>
